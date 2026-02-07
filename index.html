@@ -1,120 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>For You ❤️</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+body{
+  margin:0;
+  height:100vh;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-  .card {
-    background: rgba(255,255,255,0.25);
-    backdrop-filter: blur(12px);
-    padding: 28px;
-    border-radius: 25px;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-    max-width: 360px;
-    width: 90%;
-    z-index: 10;
-    color: white;
-    animation: fadeIn 1s ease;
-  }
+.card{
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(12px);
+  padding:28px;
+  border-radius:25px;
+  box-shadow:0 25px 50px rgba(0,0,0,0.25);
+  max-width:360px;
+  width:90%;
+  color:white;
+  text-align:center;
+  z-index:10;
+  animation:fadeIn 1s ease;
+}
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(.95);}
+  to{opacity:1;transform:scale(1);}
+}
 
-  h1 {
-    font-size: 26px;
-    margin-bottom: 10px;
-  }
+h1{font-size:26px;margin-bottom:10px;}
 
-  .name {
-    display: inline-block;
-    animation: glow 1.5s infinite alternate;
-    color: #fff;
-  }
+.name{
+  animation:glow 1.5s infinite alternate;
+}
 
-  @keyframes glow {
-    from { text-shadow: 0 0 5px #fff; }
-    to { text-shadow: 0 0 20px #ff4d6d; }
-  }
+@keyframes glow{
+  from{text-shadow:0 0 5px #fff;}
+  to{text-shadow:0 0 20px #ff4d6d;}
+}
 
-  .cute-text {
-    font-size: 15px;
-    margin-top: 10px;
-    line-height: 1.6;
-  }
+.cute-text{
+  font-size:15px;
+  line-height:1.6;
+  margin-top:10px;
+}
 
-  button {
-    padding: 14px 26px;
-    font-size: 16px;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    margin: 12px 8px;
-  }
+button{
+  padding:14px 26px;
+  font-size:16px;
+  border-radius:30px;
+  border:none;
+  cursor:pointer;
+  margin:12px 8px;
+}
 
-  #yes {
-    background: white;
-    color: #ff4d6d;
-    font-weight: bold;
-  }
+#yes{
+  background:white;
+  color:#ff4d6d;
+  font-weight:bold;
+}
 
-  #no {
-    background: #ff4d6d;
-    color: white;
-    position: absolute;
-  }
+#no{
+  background:#ff4d6d;
+  color:white;
+  position:absolute;
+}
 
-  .hidden { display: none; }
+.hidden{display:none;}
 
-  /* Background stickers */
-  .bg-sticker {
-    position: absolute;
-    width: 60px;
-    opacity: 0.85;
-    animation: floatUp 12s linear infinite;
-    z-index: 1;
-    pointer-events: none;
-  }
+img{
+  width:100%;
+  border-radius:20px;
+  margin-top:15px;
+}
 
-  @keyframes floatUp {
-    0% { transform: translateY(120vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.85; }
-    100% { transform: translateY(-140vh) rotate(360deg); opacity: 0; }
-  }
+/* Bigger floating stickers */
+.bg-sticker{
+  position:absolute;
+  width:90px;
+  opacity:0.9;
+  animation:floatUp 14s linear infinite;
+  z-index:1;
+  pointer-events:none;
+}
 
-  /* Hearts & confetti */
-  .confetti {
-    position: absolute;
-    font-size: 24px;
-    animation: pop 3s linear infinite;
-  }
+@keyframes floatUp{
+  0%{transform:translateY(120vh) rotate(0);opacity:0;}
+  10%{opacity:0.9;}
+  100%{transform:translateY(-140vh) rotate(360deg);opacity:0;}
+}
 
-  @keyframes pop {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1.3); opacity: 1; }
-    100% { transform: scale(0); opacity: 0; }
-  }
+/* Confetti & sparkles */
+.confetti{
+  position:absolute;
+  font-size:24px;
+  animation:pop 3s linear infinite;
+}
 
-  img {
-    width: 100%;
-    border-radius: 20px;
-    margin-top: 15px;
-  }
+@keyframes pop{
+  0%{transform:scale(0);opacity:0;}
+  50%{transform:scale(1.3);opacity:1;}
+  100%{transform:scale(0);opacity:0;}
+}
+
+#typeText{
+  white-space:pre-line;
+  line-height:1.7;
+  font-size:16px;
+}
 </style>
 </head>
 
@@ -124,6 +125,7 @@
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
+<!-- QUESTION -->
 <div class="card" id="questionCard">
   <h1>
     Will you be my Valentine,
@@ -142,92 +144,139 @@
   <button id="no">No 😅</button>
 </div>
 
+<!-- YES -->
 <div class="card hidden" id="yesCard">
   <h1>She said YES 💕</h1>
+
+  <p>
+    A tiny reminder for my favorite person 💕<br><br>
+    Just us, on the 14th 🌷
+  </p>
+
   <img src="photo.jpg" alt="Us ❤️">
+
   <p>Every moment with you feels like magic ✨</p>
   <button onclick="showDate()">One more thing 💌</button>
 </div>
 
+<!-- DATE -->
 <div class="card hidden" id="dateCard">
-  <h1>Save the Date 💌</h1>
-  <p>14th February — Just you & me ❤️</p>
+  <h1>Just us, on the 14th 🌷</h1>
+  <p>
+    A tiny reminder for my favorite person 💕<br><br>
+    <strong>14th February</strong><br>
+    Just you, me, laughs,<br>
+    and making memories together 🍓✨<br><br>
+    <button onclick="showSecret()">One last surprise 🤍</button>
+  </p>
+</div>
+
+<!-- SECRET -->
+<div class="card hidden" id="secretCard">
+  <h1>Just one more thing… 🤍</h1>
+  <p id="typeText"></p>
 </div>
 
 <script>
-  const noBtn = document.getElementById("no");
-  const yesBtn = document.getElementById("yes");
-  const music = document.getElementById("bgMusic");
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const music=document.getElementById("bgMusic");
 
-  ["mouseover","click","touchstart"].forEach(e =>
-    noBtn.addEventListener(e, () => {
-      noBtn.style.left = Math.random() * (window.innerWidth - 80) + "px";
-      noBtn.style.top = Math.random() * (window.innerHeight - 50) + "px";
-    })
-  );
+["mouseover","click","touchstart"].forEach(e=>{
+  noBtn.addEventListener(e,()=>{
+    noBtn.style.left=Math.random()*(window.innerWidth-80)+"px";
+    noBtn.style.top=Math.random()*(window.innerHeight-50)+"px";
+  });
+});
 
-  yesBtn.onclick = () => {
-    document.getElementById("questionCard").classList.add("hidden");
-    document.getElementById("yesCard").classList.remove("hidden");
-    music.play();
-    launchConfetti();
-  };
+yesBtn.onclick=()=>{
+  document.getElementById("questionCard").classList.add("hidden");
+  document.getElementById("yesCard").classList.remove("hidden");
+  music.play();
+  launchConfetti();
+};
 
-  function showDate() {
-    document.getElementById("yesCard").classList.add("hidden");
-    document.getElementById("dateCard").classList.remove("hidden");
-    saveTheDateBurst();
+function showDate(){
+  document.getElementById("yesCard").classList.add("hidden");
+  document.getElementById("dateCard").classList.remove("hidden");
+}
+
+function showSecret(){
+  document.getElementById("dateCard").classList.add("hidden");
+  document.getElementById("secretCard").classList.remove("hidden");
+  saveTheDateBurst();
+  typeMessage();
+}
+
+function launchConfetti(){
+  setInterval(()=>{
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.innerHTML=Math.random()>.5?"💖":"✨";
+    c.style.left=Math.random()*window.innerWidth+"px";
+    c.style.top=Math.random()*window.innerHeight+"px";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  },200);
+}
+
+function saveTheDateBurst(){
+  for(let i=0;i<40;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.innerHTML="🎉";
+    c.style.left=Math.random()*window.innerWidth+"px";
+    c.style.top=Math.random()*window.innerHeight+"px";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
   }
+}
 
-  function launchConfetti() {
-    setInterval(() => {
-      const c = document.createElement("div");
-      c.className = "confetti";
-      c.innerHTML = Math.random() > 0.5 ? "💖" : "✨";
-      c.style.left = Math.random() * window.innerWidth + "px";
-      c.style.top = Math.random() * window.innerHeight + "px";
-      document.body.appendChild(c);
-      setTimeout(() => c.remove(), 3000);
-    }, 200);
-  }
+const message=`Before this day…
+I just want you to know something 🌷
 
-  function saveTheDateBurst() {
-    for (let i = 0; i < 50; i++) {
-      const c = document.createElement("div");
-      c.className = "confetti";
-      c.innerHTML = "🎉";
-      c.style.left = Math.random() * window.innerWidth + "px";
-      c.style.top = Math.random() * window.innerHeight + "px";
-      document.body.appendChild(c);
-      setTimeout(() => c.remove(), 3000);
-    }
-  }
+Out of all the days,
+all the people,
+all the moments…
 
-  // Inline SVG stickers
-  const strawberrySVG = `
-  <svg viewBox="0 0 64 64">
-    <path d="M32 12c-12 0-20 8-20 20s8 28 20 28 20-16 20-28-8-20-20-20z" fill="#e53935"/>
-    <path d="M20 12c6 6 18 6 24 0" fill="#7cb342"/>
-  </svg>`;
+You’re my favorite one 🤍
 
-  const cupcakeSVG = `
-  <svg viewBox="0 0 64 64">
-    <path d="M12 28c0-10 40-10 40 0v6H12z" fill="#f8bbd0"/>
-    <path d="M14 34h36v18H14z" fill="#ce93d8"/>
-    <path d="M32 14l8 8H24z" fill="#f06292"/>
-  </svg>`;
+Thank you for being you,
+my baby princess,
+my strawberry cupcake 🍓🧁`;
 
-  const stickers = [strawberrySVG, cupcakeSVG];
+function typeMessage(){
+  let i=0;
+  const el=document.getElementById("typeText");
+  el.textContent="";
+  const interval=setInterval(()=>{
+    el.textContent+=message[i];
+    i++;
+    if(i>=message.length) clearInterval(interval);
+  },40);
+}
 
-  setInterval(() => {
-    const div = document.createElement("div");
-    div.className = "bg-sticker";
-    div.innerHTML = stickers[Math.floor(Math.random() * stickers.length)];
-    div.style.left = Math.random() * window.innerWidth + "px";
-    div.style.animationDuration = (10 + Math.random() * 6) + "s";
-    document.body.appendChild(div);
-    setTimeout(() => div.remove(), 16000);
-  }, 800);
+/* Inline SVG stickers */
+const strawberrySVG=`<svg viewBox="0 0 64 64">
+<path d="M32 12c-12 0-20 8-20 20s8 28 20 28 20-16 20-28-8-20-20-20z" fill="#e53935"/>
+<path d="M20 12c6 6 18 6 24 0" fill="#7cb342"/></svg>`;
+
+const cupcakeSVG=`<svg viewBox="0 0 64 64">
+<path d="M12 28c0-10 40-10 40 0v6H12z" fill="#f8bbd0"/>
+<path d="M14 34h36v18H14z" fill="#ce93d8"/>
+<path d="M32 14l8 8H24z" fill="#f06292"/></svg>`;
+
+const stickers=[strawberrySVG,cupcakeSVG];
+
+setInterval(()=>{
+  const d=document.createElement("div");
+  d.className="bg-sticker";
+  d.innerHTML=stickers[Math.floor(Math.random()*stickers.length)];
+  d.style.left=Math.random()*window.innerWidth+"px";
+  d.style.animationDuration=(12+Math.random()*6)+"s";
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),18000);
+},900);
 </script>
 
 </body>
