@@ -19,7 +19,7 @@
   }
 
   .card {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255,255,255,0.25);
     backdrop-filter: blur(10px);
     padding: 30px;
     border-radius: 25px;
@@ -27,17 +27,7 @@
     max-width: 340px;
     width: 90%;
     z-index: 10;
-  }
-
-  h1 {
-    font-size: 26px;
-    margin-bottom: 20px;
-    color: #fff;
-  }
-
-  p {
     color: white;
-    font-size: 16px;
   }
 
   button {
@@ -47,7 +37,6 @@
     border: none;
     cursor: pointer;
     margin: 10px;
-    transition: 0.3s ease;
   }
 
   #yes {
@@ -56,41 +45,38 @@
     font-weight: bold;
   }
 
-  #yes:hover {
-    transform: scale(1.15);
-  }
-
   #no {
     background: #ff4d6d;
     color: white;
     position: absolute;
   }
 
-  .hidden {
-    display: none;
-  }
+  .hidden { display: none; }
 
-  /* Floating stickers */
-  .sticker {
+  /* Floating background stickers */
+  .bg-sticker {
     position: absolute;
-    font-size: 26px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.9;
+    width: 60px;
+    opacity: 0.85;
+    animation: floatUp 12s linear infinite;
+    z-index: 1;
+    pointer-events: none;
   }
 
   @keyframes floatUp {
     0% {
-      transform: translateY(100vh) rotate(0deg);
-      opacity: 1;
+      transform: translateY(120vh) rotate(0deg);
+      opacity: 0;
     }
+    10% { opacity: 0.85; }
     100% {
-      transform: translateY(-120vh) rotate(360deg);
+      transform: translateY(-140vh) rotate(360deg);
       opacity: 0;
     }
   }
 
-  /* Hearts on yes */
-  .heart {
+  /* Hearts & sparkles */
+  .confetti {
     position: absolute;
     font-size: 22px;
     animation: pop 3s linear infinite;
@@ -101,73 +87,101 @@
     50% { transform: scale(1.2); opacity: 1; }
     100% { transform: scale(0); opacity: 0; }
   }
+
+  img {
+    width: 100%;
+    border-radius: 20px;
+    margin-top: 15px;
+  }
 </style>
 </head>
 
 <body>
 
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <div class="card" id="questionCard">
   <h1>Will you be my Valentine? ❤️</h1>
-  <button id="yes" onclick="yesClicked()">Yes 💖</button>
+  <button id="yes">Yes 💖</button>
   <button id="no">No 😅</button>
 </div>
 
 <div class="card hidden" id="yesCard">
-  <h1>YAYYYYY 💕</h1>
-  <p>You just made my heart very, very happy 🥰<br><br>
-  Happy Valentine’s Day 🍓❤️</p>
+  <h1>She said YES 💕</h1>
+  <img src="photo.jpg" alt="Us ❤️">
+  <p>You make my world sweeter every day 🍓</p>
+  <button onclick="showDate()">One more question 💌</button>
+</div>
+
+<div class="card hidden" id="dateCard">
+  <h1>Date on 14th? 💌</h1>
+  <p>Dinner. Laughs. You & me. ❤️</p>
 </div>
 
 <script>
   const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const music = document.getElementById("bgMusic");
 
-  function moveNo() {
-    const padding = 20;
-    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
-    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-  }
+  ["mouseover","click","touchstart"].forEach(e =>
+    noBtn.addEventListener(e, () => {
+      noBtn.style.left = Math.random() * (window.innerWidth - 80) + "px";
+      noBtn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+    })
+  );
 
-  // Make NO button impossible to click
-  ["mouseover", "mousedown", "touchstart", "click"].forEach(event => {
-    noBtn.addEventListener(event, moveNo);
-  });
-
-  function yesClicked() {
+  yesBtn.onclick = () => {
     document.getElementById("questionCard").classList.add("hidden");
     document.getElementById("yesCard").classList.remove("hidden");
-    launchHearts();
+    music.play();
+    launchConfetti();
+  };
+
+  function showDate() {
+    document.getElementById("yesCard").classList.add("hidden");
+    document.getElementById("dateCard").classList.remove("hidden");
   }
 
-  function launchHearts() {
+  function launchConfetti() {
     setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.top = Math.random() * window.innerHeight + "px";
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 3000);
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.innerHTML = Math.random() > 0.5 ? "💖" : "✨";
+      c.style.left = Math.random() * window.innerWidth + "px";
+      c.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3000);
     }, 200);
   }
 
-  // Floating strawberry stickers
-  setInterval(() => {
-    const sticker = document.createElement("div");
-    sticker.className = "sticker";
-    sticker.innerHTML = Math.random() > 0.5 ? "🍓" : "❤️";
-    sticker.style.left = Math.random() * window.innerWidth + "px";
-    sticker.style.animationDuration = (4 + Math.random() * 4) + "s";
-    document.body.appendChild(sticker);
+  // SVG sticker templates (transparent by default)
+  const strawberrySVG = `
+  <svg viewBox="0 0 64 64">
+    <path d="M32 12c-12 0-20 8-20 20s8 28 20 28 20-16 20-28-8-20-20-20z" fill="#e53935"/>
+    <path d="M20 12c6 6 18 6 24 0" fill="#7cb342"/>
+  </svg>`;
 
-    setTimeout(() => sticker.remove(), 7000);
-  }, 400);
+  const cupcakeSVG = `
+  <svg viewBox="0 0 64 64">
+    <path d="M12 28c0-10 40-10 40 0v6H12z" fill="#f8bbd0"/>
+    <path d="M14 34h36v18H14z" fill="#ce93d8"/>
+    <path d="M32 14l8 8H24z" fill="#f06292"/>
+  </svg>`;
+
+  const stickers = [strawberrySVG, cupcakeSVG];
+
+  setInterval(() => {
+    const div = document.createElement("div");
+    div.className = "bg-sticker";
+    div.innerHTML = stickers[Math.floor(Math.random() * stickers.length)];
+    div.style.left = Math.random() * window.innerWidth + "px";
+    div.style.animationDuration = (10 + Math.random() * 6) + "s";
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 16000);
+  }, 800);
 </script>
 
 </body>
 </html>
-
-
-
