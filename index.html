@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For You ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      overflow: hidden;
+      color: white;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      max-width: 320px;
+      width: 90%;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    button {
+      padding: 12px 22px;
+      font-size: 16px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    #yes {
+      background: white;
+      color: #ff4d6d;
+      font-weight: bold;
+    }
+
+    #yes:hover {
+      transform: scale(1.1);
+    }
+
+    #no {
+      background: #ff4d6d;
+      color: white;
+      position: absolute;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: float 3s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card" id="questionCard">
+    <h1>Will you be my Valentine? ❤️</h1>
+    <button id="yes" onclick="sayYes()">Yes 💖</button>
+    <button id="no" onmouseover="moveNo()">No 😅</button>
+  </div>
+
+  <div class="card hidden" id="yesCard">
+    <h1>You just made me the happiest person 💕</h1>
+    <p>I can’t wait to celebrate this Valentine’s Day with you 🥰</p>
+  </div>
+
+<script>
+  const noBtn = document.getElementById("no");
+
+  function moveNo() {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  function sayYes() {
+    document.getElementById("questionCard").classList.add("hidden");
+    document.getElementById("yesCard").classList.remove("hidden");
+    startConfetti();
+  }
+
+  function startConfetti() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.bottom = "0px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 3000);
+    }, 200);
+  }
+</script>
+
+</body>
+</html>
