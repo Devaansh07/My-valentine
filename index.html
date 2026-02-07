@@ -20,14 +20,42 @@
 
   .card {
     background: rgba(255,255,255,0.25);
-    backdrop-filter: blur(10px);
-    padding: 30px;
+    backdrop-filter: blur(12px);
+    padding: 28px;
     border-radius: 25px;
     box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-    max-width: 340px;
+    max-width: 360px;
     width: 90%;
     z-index: 10;
     color: white;
+    animation: fadeIn 1s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  h1 {
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+
+  .name {
+    display: inline-block;
+    animation: glow 1.5s infinite alternate;
+    color: #fff;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 5px #fff; }
+    to { text-shadow: 0 0 20px #ff4d6d; }
+  }
+
+  .cute-text {
+    font-size: 15px;
+    margin-top: 10px;
+    line-height: 1.6;
   }
 
   button {
@@ -36,7 +64,7 @@
     border-radius: 30px;
     border: none;
     cursor: pointer;
-    margin: 10px;
+    margin: 12px 8px;
   }
 
   #yes {
@@ -53,7 +81,7 @@
 
   .hidden { display: none; }
 
-  /* Floating background stickers */
+  /* Background stickers */
   .bg-sticker {
     position: absolute;
     width: 60px;
@@ -64,27 +92,21 @@
   }
 
   @keyframes floatUp {
-    0% {
-      transform: translateY(120vh) rotate(0deg);
-      opacity: 0;
-    }
+    0% { transform: translateY(120vh) rotate(0deg); opacity: 0; }
     10% { opacity: 0.85; }
-    100% {
-      transform: translateY(-140vh) rotate(360deg);
-      opacity: 0;
-    }
+    100% { transform: translateY(-140vh) rotate(360deg); opacity: 0; }
   }
 
-  /* Hearts & sparkles */
+  /* Hearts & confetti */
   .confetti {
     position: absolute;
-    font-size: 22px;
+    font-size: 24px;
     animation: pop 3s linear infinite;
   }
 
   @keyframes pop {
     0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1.2); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 1; }
     100% { transform: scale(0); opacity: 0; }
   }
 
@@ -103,7 +125,19 @@
 </audio>
 
 <div class="card" id="questionCard">
-  <h1>Will you be my Valentine? ❤️</h1>
+  <h1>
+    Will you be my Valentine,
+    <span class="name">VARA</span>? 💖
+  </h1>
+
+  <div class="cute-text">
+    My baby princess 👑<br>
+    My strawberry cupcake 🍓🧁<br>
+    My baby boo 💕<br>
+    My kuchipuiii 🥹<br><br>
+    You make my world sweeter just by being in it.
+  </div>
+
   <button id="yes">Yes 💖</button>
   <button id="no">No 😅</button>
 </div>
@@ -111,13 +145,13 @@
 <div class="card hidden" id="yesCard">
   <h1>She said YES 💕</h1>
   <img src="photo.jpg" alt="Us ❤️">
-  <p>You make my world sweeter every day 🍓</p>
-  <button onclick="showDate()">One more question 💌</button>
+  <p>Every moment with you feels like magic ✨</p>
+  <button onclick="showDate()">One more thing 💌</button>
 </div>
 
 <div class="card hidden" id="dateCard">
-  <h1>Date on 14th? 💌</h1>
-  <p>Dinner. Laughs. You & me. ❤️</p>
+  <h1>Save the Date 💌</h1>
+  <p>14th February — Just you & me ❤️</p>
 </div>
 
 <script>
@@ -142,6 +176,7 @@
   function showDate() {
     document.getElementById("yesCard").classList.add("hidden");
     document.getElementById("dateCard").classList.remove("hidden");
+    saveTheDateBurst();
   }
 
   function launchConfetti() {
@@ -156,7 +191,19 @@
     }, 200);
   }
 
-  // SVG sticker templates (transparent by default)
+  function saveTheDateBurst() {
+    for (let i = 0; i < 50; i++) {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.innerHTML = "🎉";
+      c.style.left = Math.random() * window.innerWidth + "px";
+      c.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3000);
+    }
+  }
+
+  // Inline SVG stickers
   const strawberrySVG = `
   <svg viewBox="0 0 64 64">
     <path d="M32 12c-12 0-20 8-20 20s8 28 20 28 20-16 20-28-8-20-20-20z" fill="#e53935"/>
